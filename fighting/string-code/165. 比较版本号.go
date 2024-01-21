@@ -1,6 +1,9 @@
 package main
 
-import "strings"
+import (
+	"strconv"
+	"strings"
+)
 
 func compareVersion(version1 string, version2 string) int {
 	v1 := strings.Split(version1, ".")
@@ -15,29 +18,16 @@ func compareVersion(version1 string, version2 string) int {
 
 	l := len(v1)
 	for i := 0; i < l; i++ {
-		vs1 := strings.TrimLeft(v1[i], "0")
-		vs2 := strings.TrimLeft(v2[i], "0")
-
-		for len(vs1) < len(vs2) {
-			vs1 = "0" + vs1
+		num1, _ := strconv.Atoi(v1[i])
+		num2, _ := strconv.Atoi(v2[i])
+		if num1 == num2 {
+			continue
 		}
-		for len(vs2) < len(vs1) {
-			vs2 = "0" + vs2
-		}
-
-		vl := len(vs1)
-		for j := 0; j < vl; j++ {
-			if vs1[j] == vs2[j] {
-				continue
-			}
-
-			if vs1[j] < vs2[j] {
-				return -1
-			}
-
+		if num1 < num2 {
+			return -1
+		} else {
 			return 1
 		}
 	}
-
 	return 0
 }
