@@ -1,4 +1,4 @@
-package main
+package linkList
 
 func hasCycle(head *ListNode) bool {
 	track := make(map[*ListNode]struct{})
